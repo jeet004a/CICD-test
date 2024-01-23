@@ -10,7 +10,7 @@ pipeline {
 
             stage('Test') {
                 steps {
-                    sh "${env.WORKSPACE}/venv/bin/pip install -r requirements.txt"
+                    sh 'virtualenv venv && . venv/bin/activate && pip install -r requirements.txt'
                 }
             }
 
