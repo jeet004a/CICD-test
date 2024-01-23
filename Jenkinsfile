@@ -4,8 +4,7 @@ pipeline {
             stage('Build') {
                 steps {
                     echo 'Start building'
-                    sh 'pip --version'
-                    sh 'python -m pip install -r requirements.txt'
+                    sh "${env.WORKSPACE}/venv/bin/pip install -r requirements.txt"
                 }
             }
 
