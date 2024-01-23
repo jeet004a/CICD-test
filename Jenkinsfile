@@ -8,7 +8,7 @@ pipeline {
             }
             stage('Test') {
                 steps {
-                    echo 'This is test'
+                    sh 'virtualenv venv && . venv/bin/activate && pip install -r requirements.txt && python tests.py'
                 }
             }
             stage('Deploy') {
