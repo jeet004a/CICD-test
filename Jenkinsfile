@@ -3,7 +3,7 @@ pipeline {
 	 environment {
         DJANGO_SETTINGS_MODULE = 'polling.settings'
         VIRTUAL_ENV = 'venv'
-	PYTHON3 = '/path/to/python3/bin'
+	python3 = '/path/to/python3/bin'
     }
     stages {
         stage('Build') {
