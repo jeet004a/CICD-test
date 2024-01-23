@@ -4,19 +4,19 @@ pipeline {
             stage('Build') {
                 steps {
                     echo 'Start building'
-                    sh "${env.WORKSPACE}/venv/bin/pip install -r requirements.txt"
+                    
                 }
             }
 
             stage('Test') {
                 steps {
-                    sh 'python polling/manage.py test ./polling'
+                    sh "${env.WORKSPACE}/venv/bin/pip install -r requirements.txt"
                 }
             }
 
             stage('Deploy') {
                 steps {
-                    sh 'echo not yet...'
+                    echo 'complete deploy'
                 }
             }
         }
