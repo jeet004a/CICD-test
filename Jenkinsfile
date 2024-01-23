@@ -1,21 +1,36 @@
 pipeline {
     agent any
     environment {
-        PYTHON_VERSION = '3.8'
+        PYTHON_VERSION = '3.12.0'  // Specify your Python version
+        VENV = 'venv'
     }
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Setup') {
             steps {
                 script {
-                    sh 'export PATH=$PATH:/path/to/python' + env.PYTHON_VERSION + '/bin'
+                    sh "python${PYTHON_VERSION} -m venv ${VENV}"
+                    sh "source ${VENV}/bin/activate"
+                    sh 'pip install -r requirements.txt'
                 }
             }
         }
-        stage('Build') {
+        stage('Run Tests') {
             steps {
                 script {
-                    sh 'python3 manage.py migrate'
+                    sh 'python manage.py test'
                 }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                sh 'deactivate'
             }
         }
     }
