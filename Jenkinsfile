@@ -1,37 +1,26 @@
 pipeline {
-    agent any
-    environment {
-        PYTHON_VERSION = '3.12.0'  // Specify your Python version
-        VENV = 'venv'
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Setup') {
-            steps {
-                script {
-                    sh "python${PYTHON_VERSION} -m venv ${VENV}"
-                    sh "source ${VENV}/bin/activate"
-                    sh 'pip install -r requirements.txt'
+        agent any
+        stages { 
+            stage('Build') {
+                steps {
+                    echo 'Start building'
                 }
             }
-        }
-        stage('Run Tests') {
-            steps {
-                script {
-                    sh 'python manage.py test'
+            stage('Test') {
+                sh 'virtualenv env -p python3.12'
+                sh 'source env/bin/activate'
+                sh 'env/bin/pip install -r requirements.txt'
+                sh 'env/bin/python3.12 manage.py test'
+                
+            }
+            stage('Deploy') {
+                steps {
+                    echo 'complete deploy'
                 }
             }
         }
     }
-    post {
-        always {
-            script {
-                sh 'deactivate'
-            }
-        }
-    }
-}
+	
+	
+	
+	
