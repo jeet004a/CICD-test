@@ -12,8 +12,8 @@ pipeline {
             stage('Test') {
                 steps {
                     sh "python3 -m venv ${VENV}"
-                    sh "source ${VENV}/bin/activate"
-					sh 'pip install -r requirements.txt'
+                    sh ". ${VENV}/bin/activate"
+		    sh 'pip install -r requirements.txt'
                 }
             }
             stage('Deploy') {
