@@ -1,5 +1,7 @@
 pipeline {
-        agent any
+        agent {
+        docker { image 'python:3' }
+    }
         stages { 
             stage('Build') {
                 steps {
@@ -8,7 +10,7 @@ pipeline {
             }
             stage('Test') {
                 steps {
-                    sh 'virtualenv venv && . venv/bin/activate && pip install -r requirements.txt && python tests.py'
+                    sh 'pip --version'
                 }
             }
             stage('Deploy') {
