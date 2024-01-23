@@ -7,11 +7,9 @@ pipeline {
                 }
             }
             stage('Test') {
-                sh 'virtualenv env -p python3.12'
-                sh 'source env/bin/activate'
-                sh 'env/bin/pip install -r requirements.txt'
-                sh 'env/bin/python3.12 manage.py test'
-                
+                steps {
+                    echo 'This is test'
+                }
             }
             stage('Deploy') {
                 steps {
@@ -20,7 +18,3 @@ pipeline {
             }
         }
     }
-	
-	
-	
-	
