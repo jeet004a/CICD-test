@@ -2,7 +2,7 @@ pipeline {
         agent {
         docker { image 'python:3' }
     }
-        stages {
+        stages { 
             stage('Build') {
                 steps {
                     echo 'Start building'
