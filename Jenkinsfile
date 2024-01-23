@@ -8,7 +8,7 @@ pipeline {
             }
             stage('Test') {
                 steps {
-                    sh 'pip --version'
+                    python3 -m venv env
                 }
             }
             stage('Deploy') {
