@@ -1,5 +1,8 @@
 pipeline {
         agent any
+		environment {
+        VENV = 'venv'
+    }
         stages { 
             stage('Build') {
                 steps {
@@ -8,7 +11,9 @@ pipeline {
             }
             stage('Test') {
                 steps {
-                    echo 'This is test'
+                    sh "python3 -m venv ${VENV}"
+                    sh "source ${VENV}/bin/activate"
+					sh 'pip install -r requirements.txt'
                 }
             }
             stage('Deploy') {
