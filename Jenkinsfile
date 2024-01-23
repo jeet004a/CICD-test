@@ -1,26 +1,22 @@
 pipeline {
     agent any
-
+    environment {
+        PYTHON_VERSION = '3.8'
+    }
     stages {
         stage('Setup') {
             steps {
                 script {
-                    sh 'python3 -m venv venv'
-                    sh 'source venv/bin/activate'
+                    sh 'export PATH=$PATH:/path/to/python' + env.PYTHON_VERSION + '/bin'
                 }
             }
         }
-
         stage('Build') {
             steps {
                 script {
-                    sh 'pip install -r requirements.txt'
                     sh 'python3 manage.py migrate'
-                    // Add other Django build steps
                 }
             }
         }
-
-        // Add more stages as needed
     }
 }
