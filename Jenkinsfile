@@ -2,7 +2,7 @@ pipeline {
     agent any
 	 environment {
         DJANGO_SETTINGS_MODULE = 'polling.settings'
-        VIRTUAL_ENV = 'venv'
+        VIRTUAL_ENV = 'jack'
 	PYTHON3_PATH = '/path/to/python3/bin'
     }
     stages {
@@ -10,6 +10,7 @@ pipeline {
             steps {
                 script {
                     sh "export PATH=${env.PYTHON3_PATH}:${env.PATH}"
+		    sh 'py -m venv $VIRTUAL_ENV'
                     sh "source $VIRTUAL_ENV/bin/activate && pip install -r requirements.txt"
 		    sh "source $VIRTUAL_ENV/bin/activate && python manage.py test"
                 }
